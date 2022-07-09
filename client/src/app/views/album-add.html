@@ -1,0 +1,31 @@
+<div class="col-lg-6" *ngIf="identity.rol == 'ROLE_ADMIN'">
+    <h1>{{titulo}}</h1>
+    <div *ngIf="alertMessage">
+        <div class="alert alert-info">
+            <strong> {{alertMessage}}</strong>
+        </div>
+    </div>
+    <form #formAlbum="ngForm" (ngSubmit)="onSubmit()">
+        <p>
+            <label>Titulo</label>
+            <input type="text" class="form-control" #titulo2="ngModel" name="titulo2" [(ngModel)]="album.titulo"
+                required />
+            <span *ngIf="!titulo2.valid && titulo2.touched">El titulo es obligatorio</span>
+        </p>
+
+        <p>
+            <label>Descripcion</label>
+            <textarea type="text" class="form-control" #descripcion="ngModel" name="descripcion"
+                [(ngModel)]="album.descripcion" required></textarea>
+            <span *ngIf="!descripcion.valid && descripcion.touched">La descripcion es obligatorio</span>
+        </p>
+
+        <p>
+            <label>Año</label>
+            <input type="text" class="form-control" #year="ngModel" name="year" [(ngModel)]="album['año']" required />
+            <span *ngIf="!year.valid && year.touched">El año es obligatorio</span>
+        </p>
+
+        <input type="submit" class="btn btn-success" value="Crear album" [disabled]="!formAlbum.form.valid" />
+    </form>
+</div>
